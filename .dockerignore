@@ -1,0 +1,16 @@
+.env
+.env.*
+.venv
+.qa-venv
+release
+node_modules
+original
+tests
+collector/state
+collector/config.json
+.transfer
+recovery
+site/__qa__
+**/__pycache__
+**/*.key
+**/*.sqlite3*

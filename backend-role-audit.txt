@@ -1,0 +1,272 @@
+﻿FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\business_ai.py
+LINE: 3
+CODE: The database RLS/role-gated RPC is the ONLY authority. No browser-supplied
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\business_ai.py
+LINE: 4
+CODE: role, count, user text, resume, identifier, or model selection is trusted.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\business_ai.py
+LINE: 10
+CODE:     'admin': 'sowrix_r462_admin_pulse',
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\business_ai.py
+LINE: 11
+CODE:     'hr': 'sowrix_r463_hr_snapshot',
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\business_ai.py
+LINE: 14
+CODE:     'admin': ('open_tickets', 'pending_approvals', 'active_projects', 'open_applications',
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\business_ai.py
+LINE: 16
+CODE:     'hr': ('new_candidates', 'under_review', 'shortlisted', 'total_open_candidates'),
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\business_ai.py
+LINE: 41
+CODE:         raise web.HTTPBadRequest(text='Select the Admin or HR summary')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\business_ai.py
+LINE: 47
+CODE:     # current Admin/HR module permission; no service-role bypass is possible.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\business_ai.py
+LINE: 59
+CODE:         'contents': [{'role': 'user', 'parts': [{'text': json.dumps({'role_scope': mode, 'counts': metrics})}]}],
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\defensowrix_interest.py
+LINE: 49
+CODE:                 raise web.HTTPForbidden(text='Authorized enquiries administrator required.')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\defensowrix_interest.py
+LINE: 91
+CODE:         gateway.rate('dw-interest-admin:' + digest(tokens['user']['id']), 60, 60)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\defensowrix_interest.py
+LINE: 146
+CODE:     app.router.add_post('/api/admin/defensowrix-requests', manage)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\operations_scheduler.py
+LINE: 25
+CODE:             conf=data['configuration'];exact(conf,'enabled interval_seconds timeout_seconds failure_confirm recovery_confirm thresholds')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\operations_scheduler.py
+LINE: 27
+CODE:             if type(conf['thresholds']) is not list or len(conf['thresholds'])>8:raise ValueError()
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\operations_scheduler.py
+LINE: 28
+CODE:             # The direct-provider SQL RPC owns the authoritative unit and threshold validation.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\payroll_pdf.py
+LINE: 21
+CODE:     except (ValueError,InvalidOperation):return 'Verify with HR'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\payroll_pdf.py
+LINE: 39
+CODE:     pdf.setFont('Helvetica',10);pdf.drawString(45,height-162,'Review payroll taxes, legal deductions and salary settlement with authorized HR.')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_chat.py
+LINE: 46
+CODE:     "Do not access or claim to access private client, HR, employee, contract or billing data. "
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_chat.py
+LINE: 69
+CODE:     previous=next((norm(t['text']) for t in reversed(history) if t['role']=='user'),'')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_chat.py
+LINE: 93
+CODE:             return f"{subject}: {svc['description']} SOWRIX can discuss the scope and confirm availability through Contact."
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_chat.py
+LINE: 113
+CODE:         if (not isinstance(turn,dict) or set(turn)!={'role','text'} or
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_chat.py
+LINE: 114
+CODE:             turn.get('role') not in ('user','assistant') or not isinstance(turn.get('text'),str) or
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_chat.py
+LINE: 118
+CODE:         clean.append({'role':turn['role'], 'text':turn['text']})
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_chat.py
+LINE: 158
+CODE:     contents=[{'role':'model' if t['role']=='assistant' else 'user','parts':[{'text':scrub(t['text'])}]} for t in history]
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_chat.py
+LINE: 159
+CODE:     contents.append({'role':'user','parts':[{'text':scrub(message)}]})
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_cms.py
+LINE: 114
+CODE:     head += f'\n<link rel="canonical" href="{canonical}">\n'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_cms.py
+LINE: 161
+CODE:                 raise web.HTTPForbidden(text='An authorized CMS administrator and independent publication reviewer are required.')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_cms.py
+LINE: 180
+CODE:     async def admin(request):
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_cms.py
+LINE: 184
+CODE:         gateway.rate('cms-admin:' + digest(session['user']['id']), 90, 60)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_cms.py
+LINE: 201
+CODE:         result = await rpc('sowrix_cms_admin', {'p_action': action, 'p_kind': kind,
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_cms.py
+LINE: 209
+CODE:     app.router.add_post('/api/admin/editorial', admin)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\public_routes.py
+LINE: 4
+CODE: PUBLIC_PATH_PATTERN = r'^/(?:about|services|industries|solutions|portfolio|blog|defensowrix|careers|contact|privacy|terms|cookies|disclaimer|quote|compare|faq|stories|login|workspace|admin|hr|employee|client-portal|client-projects|client-tickets|client-invoices|client-quotes|client-amc|client-documents|client-defensowrix|portal|client)(?:/[A-Za-z0-9_-]+)*/?$'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 117
+CODE:           public_key=os.getenv("SUPABASE_PUBLISHABLE_KEY",""),selfhosted_supabase_origin=os.getenv("SUPABASE_SELF_HOSTED_ORIGIN","").rstrip("/"),service_key=os.getenv("SUPABASE_SERVICE_ROLE_KEY",""),
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 313
+CODE:         # Dashboard reads must not consume the shared-office login throttle.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 457
+CODE:         # Employee invitations must use a current caller permission, never a service-role bypass.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 464
+CODE:         # Auth, administrative provider APIs and service credentials are never proxied from the browser.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 514
+CODE:             link=await self.p.json("POST","/auth/v1/admin/generate_link?"+urlencode({"redirect_to":redirect}),service=True,
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 531
+CODE:                 "\n\nThen open Team & Client Sign In using this email address. Your Gmail password is not required. DEFENSOWRIX access requires separate Super Admin approval.\n\nIf you did not expect this invitation, contact SOWRIX."}
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 544
+CODE:                 return web.json_response({"ok":True,"linked":True,"email_status":"accepted","message":"Invitation accepted by the email provider. Audit recording needs administrator attention; do not resend just to repair the audit."})
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 606
+CODE:               "contents":[{"role":"user","parts":[{"text":self.ai_evidence(run["incident"])}]}],
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 845
+CODE:             '<link rel="stylesheet" href="/r467-public.css"></head><body>'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 846
+CODE:             '<header><a class="brand" href="/"><img src="/assets/sowrix-original.png" alt="">'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 849
+CODE:             f'<h1>{escape(title)}</h1><p>{escape(message)}</p><a class="cta" href="/">Return home</a>'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 850
+CODE:             ' <a href="/contact">Contact SOWRIX</a></section></main></body></html>')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1085
+CODE:         if re.match(r'^/(?:app|workspace|admin|hr|employee|portal|client(?:-[a-z-]+)?|login)(?:/|$)', request.path):
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1137
+CODE:             return web.Response(body=await asyncio.to_thread(page.read_bytes),headers=headers)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1301
+CODE:         html = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Insights</title><link rel="stylesheet" href="/r467-public.css"></head>'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1306
+CODE:         body = '<body class="sx-editorial-article"><header><a class="brand" href="/"><img src="/assets/sowrix-original.png" alt="">SOWRIX Technologies</a><nav aria-label="Public pages"><a href="/blog">Insights</a><a href="/contact">Contact</a></nav></header><main><article><h1>'+escape(record['title'])+'</h1>'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1311
+CODE:         return web.Response(text=head+body+'</article></main><footer><a href="mailto:contact@sowrix.in">contact@sowrix.in</a></footer></body></html>',
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1344
+CODE:                     html=re.sub(r'href="/#/(privacy|terms)"',r'href="/\1"',html)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1347
+CODE:             html=re.sub(r'href="/#/(privacy|terms)"',r'href="/\1"',file.read_text(encoding='utf-8'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1354
+CODE:         # Anonymous read ONLY through the dedicated, sanitized and audited SQL RPC.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1383
+CODE:     # R43: explicitly expose only the PWA's three public files. Avoid a generic file-serving route.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1493
+CODE:     async def admin_early_access(request):
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1495
+CODE:         gateway.rate('early-access-admin:'+digest(tokens['user']['id']),60,60)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1509
+CODE:         try:result=await gateway.p.rpc('sowrix_early_access_admin',{'p_action':action,'p_data':data},token=tokens['access_token'])
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1511
+CODE:             if ex.status in (401,403):raise web.HTTPForbidden(text='Early Access Admin permission required.')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1527
+CODE:         # R46.10: public only after explicit second-Admin approval in SQL.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1547
+CODE:     async def admin_system_health(request):
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1548
+CODE:         # Authentication + DB authorization, *not* a guessed role in browser state.
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1551
+CODE:         gateway.rate('r4610-admin-health:'+digest(tokens['user']['id']),10,60)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1553
+CODE:             pulse=await gateway.p.rpc('sowrix_r462_admin_pulse',{},token=tokens['access_token'])
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1555
+CODE:             if ex.status in (401,403):raise web.HTTPForbidden(text='Admin access required')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1556
+CODE:             raise web.HTTPServiceUnavailable(text='Admin database health check unavailable')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1557
+CODE:         if not isinstance(pulse,dict):raise web.HTTPServiceUnavailable(text='Admin check returned invalid data')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1570
+CODE:                 {'name':'Secure admin session and database permission','status':'ok'},
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1595
+CODE:     app.router.add_get('/api/admin/system-health',admin_system_health)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\backend\server.py
+LINE: 1600
+CODE:     app.router.add_route('*','/api/admin/early-access',admin_early_access)
+----------------------------------------

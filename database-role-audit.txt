@@ -1,0 +1,1436 @@
+﻿FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\11-defensowrix.sql
+LINE: 151
+CODE:  SELECT public.sowrix_secure_session_allowed() AND public.sowrix_access_role()='super_admin'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\11-defensowrix.sql
+LINE: 160
+CODE:  IF public.sowrix_access_role() IS DISTINCT FROM 'client' THEN RETURN false; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\11-defensowrix.sql
+LINE: 214
+CODE:  IF NOT EXISTS(SELECT 1 FROM public.user_roles WHERE user_id=p_user_id AND role::text='super_admin') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\11-defensowrix.sql
+LINE: 243
+CODE:    'requires_mfa',public.sowrix_access_role()<>'client' OR EXISTS(SELECT 1 FROM public.sowrix_def_members WHERE user_id=auth.uid() AND enabled AND role='customer_admin'),
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\11-defensowrix.sql
+LINE: 244
+CODE:    'role',public.sowrix_access_role(),'user_id',auth.uid(),
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\13-defensowrix-hardening.sql
+LINE: 14
+CODE:  IF predicate IS NOT NULL AND (position('client' in predicate)=0 OR position('super_admin' in predicate)=0) THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\13-defensowrix-hardening.sql
+LINE: 17
+CODE:     ||predicate||') OR role::text IN (''client'',''super_admin''))';
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\15-amc-management.sql
+LINE: 13
+CODE:  VALUES('amc','{super_admin,admin,hr_manager,hr_staff,project_manager,employee,client}')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\15-amc-management.sql
+LINE: 44
+CODE:   (public.sowrix_access_role()<>'client' AND public.sowrix_wide_access('amc','view')) OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\15-amc-management.sql
+LINE: 45
+CODE:   (public.sowrix_access_role()='client' AND status<>'draft' AND public.sowrix_org_access(client_id,'billing'))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\15-amc-management.sql
+LINE: 48
+CODE:  public.sowrix_secure_session_allowed() AND public.sowrix_access_role()<>'client' AND public.sowrix_has_permission('amc','create') AND
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\15-amc-management.sql
+LINE: 52
+CODE:  public.sowrix_secure_session_allowed() AND public.sowrix_access_role()<>'client' AND public.sowrix_has_permission('amc','edit') AND
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\15-amc-management.sql
+LINE: 54
+CODE:  WITH CHECK(public.sowrix_secure_session_allowed() AND public.sowrix_access_role()<>'client' AND public.sowrix_has_permission('amc','edit') AND
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 47
+CODE:  (lower(r.role::text) IN ('admin','super_admin') OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 54
+CODE:  WHERE r.user_id=p_user AND lower(r.role::text) IN ('super_admin','admin','hr','hr_manager','hr_staff','employee','project_manager')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 56
+CODE:  (lower(r.role::text) IN ('admin','super_admin') OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 85
+CODE:  IF r IN ('admin','super_admin') THEN RETURN true; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 109
+CODE:  SELECT public.sowrix_secure_session_allowed() AND public.sowrix_access_role()<>'client'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 146
+CODE:  AND NOT(m IN ('applications','interviews') AND public.sowrix_access_role() IN ('hr','hr_staff','hr_manager'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 147
+CODE:  AND NOT(m='projects' AND public.sowrix_access_role()='project_manager' AND o->>f=auth.uid()::text)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 154
+CODE:    IF NOT public.sowrix_has_permission(m,'assign') OR public.sowrix_access_role()='client' THEN RAISE EXCEPTION 'Assignment permission required' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 182
+CODE:  OR public.sowrix_access_role()='client' OR NOT public.sowrix_user_record_access(auth.uid(),p_module,rec) THEN RAISE EXCEPTION 'Record not available for assignment' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 194
+CODE:  IF t IS NULL OR public.sowrix_access_role()='client' OR NOT public.sowrix_has_permission(p_module,'assign') THEN RAISE EXCEPTION 'Assignment permission required' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 207
+CODE:  IF t IS NULL OR NOT(p_status=ANY(allowed)) OR NOT public.sowrix_has_permission(p_module,'edit') OR public.sowrix_access_role()='client' THEN RAISE EXCEPTION 'Status update unavailable' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 503
+CODE:  see_team:=public.sowrix_access_admin() OR EXISTS(SELECT 1 FROM public.sowrix_permission_catalog c WHERE c.module_key IN ('employees','attendance','leaves','payroll','interviews') AND public.sowrix_has_permission(c.module_key,'view') AND (public.sowrix_access_role() IN ('hr','hr_staff','hr_manager') OR public.sowrix_wide_access(c.module_key,'view')));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 529
+CODE:  FROM public.sowrix_ticket_replies WHERE ticket_id=p_ticket AND (visibility='public' OR public.sowrix_access_role()<>'client')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\16-work-and-notifications.sql
+LINE: 537
+CODE:  IF p_visibility NOT IN ('public','internal') OR (p_visibility='internal' AND public.sowrix_access_role()='client') OR p_key IS NULL THEN RAISE EXCEPTION 'Invalid reply visibility' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\17-employee-attendance-actions.sql
+LINE: 20
+CODE:   v_role := public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\42-attendance-review-metadata.sql
+LINE: 41
+CODE:  IF auth.uid() IS NULL OR public.sowrix_access_role() NOT IN ('super_admin','admin')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\45-role-ids-and-payroll-review.sql
+LINE: 25
+CODE: USING (user_id=auth.uid() OR public.sowrix_access_role() IN ('super_admin','admin')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\45-role-ids-and-payroll-review.sql
+LINE: 26
+CODE:  OR (public.sowrix_access_role() IN ('hr_manager','hr','hr_staff') AND first_role IN ('employee','hr','hr_manager','hr_staff')));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\45-role-ids-and-payroll-review.sql
+LINE: 53
+CODE:     WHEN 'super_admin' THEN 'AD' WHEN 'admin' THEN 'AD'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\45-role-ids-and-payroll-review.sql
+LINE: 70
+CODE:        public.sowrix_r45_next_code(CASE WHEN lower(r.role::text) IN ('super_admin','admin') THEN 'AD'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\45-role-ids-and-payroll-review.sql
+LINE: 147
+CODE: FOR SELECT TO authenticated USING (public.sowrix_access_role() IN ('super_admin','admin','hr_manager') AND public.sowrix_has_module_access('payroll'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\45-role-ids-and-payroll-review.sql
+LINE: 150
+CODE: FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('super_admin','admin','hr_manager') AND public.sowrix_has_module_access('payroll') AND created_by=auth.uid() AND updated_by=auth.uid() AND state='draft');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-2-operations.sql
+LINE: 155
+CODE:   IF NOT(public.sowrix_access_admin() OR (public.sowrix_access_role()='hr_manager'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-2-operations.sql
+LINE: 168
+CODE:  IF NOT(public.sowrix_access_admin() OR (public.sowrix_access_role()='hr_manager'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-2-operations.sql
+LINE: 188
+CODE:  IF (NOT public.sowrix_access_admin() AND NOT(public.sowrix_access_role()='hr_manager'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-2-operations.sql
+LINE: 289
+CODE:    OR public.sowrix_access_role() IN ('hr','hr_manager','hr_staff')) THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-3-assistant.sql
+LINE: 17
+CODE:     (public.sowrix_access_role() IN ('hr','hr_staff','hr_manager') AND
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-3-assistant.sql
+LINE: 34
+CODE:  IF public.sowrix_access_role() IS DISTINCT FROM 'client' THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-4-enterprise.sql
+LINE: 24
+CODE:  IF (NOT public.sowrix_access_admin() AND NOT (public.sowrix_access_role()='hr_manager'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-4-enterprise.sql
+LINE: 126
+CODE:  WHERE (published AND (audience='all_signed_in' OR public.sowrix_access_role() NOT IN ('client')))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-5-enterprise.sql
+LINE: 38
+CODE:     AND (k.audience='all_signed_in' OR public.sowrix_access_role()<>'client')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-5-enterprise.sql
+LINE: 100
+CODE:  IF NOT public.sowrix_access_admin() AND NOT (public.sowrix_access_role()<>'client' AND public.sowrix_has_module_access('documents'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-5-enterprise.sql
+LINE: 172
+CODE:  IF public.sowrix_access_role()='client' OR NOT public.sowrix_user_active(auth.uid()) THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-5-enterprise.sql
+LINE: 190
+CODE:  reviewer:=public.sowrix_access_admin() OR public.sowrix_access_role() IN ('hr','hr_staff','hr_manager');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-5-enterprise.sql
+LINE: 203
+CODE:  IF NOT (public.sowrix_access_admin() OR public.sowrix_access_role() IN ('hr','hr_staff','hr_manager'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-5-enterprise.sql
+LINE: 221
+CODE:  IF public.sowrix_access_role()<>'client' THEN RAISE EXCEPTION 'Client session required' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-6-enterprise.sql
+LINE: 87
+CODE:  r:=public.sowrix_access_role();is_admin:=public.sowrix_access_admin();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-6-enterprise.sql
+LINE: 159
+CODE:  r:=public.sowrix_access_role();is_admin:=public.sowrix_access_admin();is_hr:=is_admin OR r IN ('hr','hr_staff','hr_manager');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-6-preflight-read-only.sql
+LINE: 6
+CODE: UNION ALL SELECT 'role_access',to_regprocedure('public.sowrix_access_role()') IS NOT NULL
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-7-business-growth.sql
+LINE: 94
+CODE:  is_admin:=public.sowrix_access_admin();r:=public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-7-business-growth.sql
+LINE: 179
+CODE:  is_admin:=public.sowrix_access_admin();r:=public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-7-business-growth.sql
+LINE: 322
+CODE:  is_admin:=public.sowrix_access_admin();r:=public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\46-7-preflight-read-only.sql
+LINE: 4
+CODE: UNION ALL SELECT 'role_checks',to_regprocedure('public.sowrix_access_role()') IS NOT NULL
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\53-client-onboarding-guard.sql
+LINE: 7
+CODE:  OR to_regprocedure('public.sowrix_access_role()') IS NULL
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\53-client-onboarding-guard.sql
+LINE: 15
+CODE:  WITH CHECK (public.sowrix_access_admin() AND public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\53-client-onboarding-guard.sql
+LINE: 18
+CODE:  USING (public.sowrix_access_admin() AND public.sowrix_access_role() IN ('admin','super_admin'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\53-client-onboarding-guard.sql
+LINE: 19
+CODE:  WITH CHECK (public.sowrix_access_admin() AND public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\54-automatic-reference-numbers.sql
+LINE: 40
+CODE:     WHEN 'super_admin' THEN 'SA' WHEN 'admin' THEN 'AD'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\54-automatic-reference-numbers.sql
+LINE: 263
+CODE:  r:=public.sowrix_access_role();is_admin:=public.sowrix_access_admin();is_hr:=is_admin OR r IN ('hr','hr_staff','hr_manager');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\55-super-admin-team-governance.sql
+LINE: 6
+CODE:  guard := 'IF public.sowrix_access_role() IS DISTINCT FROM ''super_admin'' THEN RAISE EXCEPTION ''Super Admin access required'' USING ERRCODE=''42501''; END IF;';
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\56-admin-permission-inventory-read-only.sql
+LINE: 13
+CODE:  p.prosrc ILIKE '%sowrix_access_admin(%' OR p.prosrc ILIKE '%''admin''%''super_admin''%' OR p.prosrc ILIKE '%''super_admin''%''admin''%') ORDER BY 1;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\56-admin-permission-inventory-read-only.sql
+LINE: 15
+CODE:  (coalesce(qual,'')||coalesce(with_check,'')) ~* '(sowrix_access_admin|super_admin)' ORDER BY 1,2;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\56-super-admin-account-governance.sql
+LINE: 20
+CODE:  IF public.sowrix_access_role() IS DISTINCT FROM 'super_admin' AND EXISTS(
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\56-super-admin-account-governance.sql
+LINE: 21
+CODE:   SELECT 1 FROM public.user_roles WHERE user_id=p_user_id AND lower(role::text) IN ('admin','super_admin')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\56-super-admin-account-governance.sql
+LINE: 41
+CODE:    EXECUTE format('CREATE POLICY sowrix_r1012_governance_read ON public.%I AS RESTRICTIVE FOR SELECT TO authenticated USING (public.sowrix_secure_session_allowed() AND public.sowrix_access_role() = ''super_admin'')',t);
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\56-super-admin-account-governance.sql
+LINE: 43
+CODE:    EXECUTE format('CREATE POLICY sowrix_r1012_governance_read ON public.%I AS RESTRICTIVE FOR SELECT TO authenticated USING (public.sowrix_secure_session_allowed() AND (user_id=auth.uid() OR public.sowrix_access_role() = ''super_admin''))',t);
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\57-expense-admin-permissions.sql
+LINE: 15
+CODE:   EXECUTE replace(f,p,$guard$(/* R101.3 expense grant */ (public.sowrix_access_admin() AND NOT (public.sowrix_access_role()='admin' AND p_module='expenses')) OR ($guard$);
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\57-expense-admin-permissions.sql
+LINE: 25
+CODE:  IF public.sowrix_access_role()='admin' AND NEW.status IS DISTINCT FROM OLD.status AND NOT public.sowrix_has_permission('expenses','edit') AND NOT (NEW.status IN ('approved','rejected','paid') OR OLD.status IN ('approved','rejected','paid')) THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\58-business-module-permissions.sql
+LINE: 21
+CODE:   old:='lower(r.role::text) IN (''admin'',''super_admin'')';
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\58-business-module-permissions.sql
+LINE: 23
+CODE:   EXECUTE replace(f,old,$replacement$(lower(r.role::text)='super_admin' OR (lower(r.role::text)='admin' AND p_module NOT IN ('expenses','clients','projects','tasks','invoices','quotations','tickets'))) /* R101.4 business grants */$replacement$);
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\59-people-payroll-amc-permissions.sql
+LINE: 22
+CODE:   old:=$roles$public.sowrix_access_role() NOT IN ('hr','hr_staff','hr_manager')$roles$;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\59-people-payroll-amc-permissions.sql
+LINE: 24
+CODE:   EXECUTE replace(f,old,$roles$public.sowrix_access_role() NOT IN ('admin','hr','hr_staff','hr_manager')$roles$);
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\59-people-payroll-amc-permissions.sql
+LINE: 37
+CODE: CREATE POLICY sowrix_r1015_amc_read ON public.sowrix_amc_contracts AS RESTRICTIVE FOR SELECT TO authenticated USING (public.sowrix_access_role() IS DISTINCT FROM 'admin' OR public.sowrix_has_permission('amc','view'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\59-people-payroll-amc-permissions.sql
+LINE: 39
+CODE: CREATE POLICY sowrix_r1015_amc_create ON public.sowrix_amc_contracts AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IS DISTINCT FROM 'admin' OR public.sowrix_has_permission('amc','create'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\59-people-payroll-amc-permissions.sql
+LINE: 41
+CODE: CREATE POLICY sowrix_r1015_amc_edit ON public.sowrix_amc_contracts AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IS DISTINCT FROM 'admin' OR public.sowrix_has_permission('amc','edit')) WITH CHECK (public.sowrix_access_role() IS DISTINCT FROM 'admin' OR public.sowrix_has_permission('amc','edit'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\59-people-payroll-amc-permissions.sql
+LINE: 44
+CODE: CREATE POLICY sowrix_r1015_payroll_review_create ON public.sowrix_r45_payroll_reviews AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IS DISTINCT FROM 'admin' OR public.sowrix_has_permission('payroll','create'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\60-attendance-leave-permissions.sql
+LINE: 22
+CODE:   EXECUTE replace(f,$a$NOT (p_module='attendance' AND p_action<>'view')$a$,$a$NOT (p_module='attendance' AND p_action<>'view' AND public.sowrix_access_role() IS DISTINCT FROM 'admin')$a$);
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\60-attendance-leave-permissions.sql
+LINE: 39
+CODE:  IF public.sowrix_access_role()='admin' AND NOT public.sowrix_has_permission('leaves','edit') AND NEW.status IS DISTINCT FROM OLD.status AND NOT (OLD.status='pending' AND NEW.status IN ('approved','rejected') AND public.sowrix_has_permission('leaves','approve')) THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 26
+CODE: INSERT INTO public.sowrix_access_modules(module_key,allowed_roles) VALUES ('crm',ARRAY['admin','super_admin']::text[]),('editorial',ARRAY['admin','super_admin']::text[]) ON CONFLICT DO NOTHING;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 37
+CODE:   ($v$public.sowrix_r465_document_list()$v$,$v$PERFORM public.sowrix_require_secure_session(false);$v$,$v$IF public.sowrix_access_role()='admin' AND NOT public.sowrix_has_permission('documents','view') THEN RAISE EXCEPTION 'Document view permission required' USING ERRCODE='42501'; END IF;$v$,1)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 38
+CODE:  ,($v$public.sowrix_r465_document_create(text,text,text,text,uuid,date)$v$,$v$PERFORM public.sowrix_require_secure_session(false);$v$,$v$IF public.sowrix_access_role()='admin' AND NOT public.sowrix_has_permission('documents','create') THEN RAISE EXCEPTION 'Document create permission required' USING ERRCODE='42501'; END IF;$v$,2)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 39
+CODE:  ,($v$public.sowrix_r465_document_version(uuid,text)$v$,$v$PERFORM public.sowrix_require_secure_session(false);$v$,$v$IF public.sowrix_access_role()='admin' AND NOT public.sowrix_has_permission('documents','edit') THEN RAISE EXCEPTION 'Document edit permission required' USING ERRCODE='42501'; END IF;$v$,3)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 40
+CODE:  ,($v$public.sowrix_r465_document_approve(uuid)$v$,$v$PERFORM public.sowrix_require_secure_session(false);$v$,$v$IF public.sowrix_access_role()='admin' AND NOT public.sowrix_has_permission('documents','approve') THEN RAISE EXCEPTION 'Document approve permission required' USING ERRCODE='42501'; END IF;$v$,4)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 41
+CODE:  ,($v$public.sowrix_r465_organization_choices()$v$,$v$PERFORM public.sowrix_require_secure_session(false);$v$,$v$IF public.sowrix_access_role()='admin' AND NOT public.sowrix_has_permission('documents','create') THEN RAISE EXCEPTION 'Document create permission required' USING ERRCODE='42501'; END IF;$v$,5)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 42
+CODE:  ,($v$public.sowrix_r467_board(text)$v$,$v$PERFORM public.sowrix_require_secure_session(false);$v$,$v$IF public.sowrix_access_role()='admin' AND p_section IN ('crm','enquiries') AND (NOT public.sowrix_has_permission('crm','view') OR (p_section='enquiries' AND NOT public.sowrix_has_permission('enquiries','view'))) THEN RAISE EXCEPTION 'CRM access required' USING ERRCODE='42501'; END IF;$v$,6)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 43
+CODE:  ,($v$public.sowrix_r467_apply(text,jsonb)$v$,$v$PERFORM public.sowrix_require_secure_session(false);$v$,$v$IF public.sowrix_access_role()='admin' AND p_action IN ('lead_create','lead_stage','lead_followup','lead_note') AND (NOT public.sowrix_has_permission('crm',CASE WHEN p_action='lead_create' THEN 'create' ELSE 'edit' END) OR (p_action='lead_create' AND NOT public.sowrix_has_permission('enquiries','view'))) THEN RAISE EXCEPTION 'CRM action permission required' USING ERRCODE='42501'; END IF;$v$,7)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 44
+CODE:  ,($v$public.sowrix_cms_admin(text,text,text,jsonb)$v$,$v$IF p_kind IS NULL OR p_kind NOT IN$v$,$v$IF public.sowrix_access_role()='admin' AND NOT public.sowrix_has_permission('editorial',CASE WHEN p_action IN ('list','preview','save') THEN 'view' WHEN p_action IN ('publish','unpublish') THEN 'approve' WHEN p_action='archive' THEN 'delete' WHEN p_action='restore' THEN 'edit' ELSE 'invalid' END) THEN RAISE EXCEPTION 'Editorial permission required' USING ERRCODE='42501'; END IF;$v$,8)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\61-recruitment-content-permissions.sql
+LINE: 45
+CODE:  ,($v$public.sowrix_cms_admin(text,text,text,jsonb)$v$,$v$IF p_action='save' THEN$v$,$v$IF public.sowrix_access_role()='admin' AND p_action='save' AND NOT public.sowrix_has_permission('editorial',CASE WHEN e.id IS NULL THEN 'create' ELSE 'edit' END) THEN RAISE EXCEPTION 'Editorial save permission required' USING ERRCODE='42501'; END IF;$v$,9)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\62-storage-analytics-permissions.sql
+LINE: 13
+CODE:  bucket_id<>'sowrix-private' OR public.sowrix_access_role() IS DISTINCT FROM 'admin' OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\62-storage-analytics-permissions.sql
+LINE: 17
+CODE:  bucket_id<>'resumes' OR public.sowrix_access_role() IS DISTINCT FROM 'admin' OR public.sowrix_has_permission('applications','view'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\62-storage-analytics-permissions.sql
+LINE: 20
+CODE:  bucket_id<>'resumes' OR public.sowrix_access_role() IS DISTINCT FROM 'admin' OR public.sowrix_has_permission('applications','delete'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\62-storage-analytics-permissions.sql
+LINE: 23
+CODE:  kind<>'document' OR public.sowrix_access_role() IS DISTINCT FROM 'admin' OR public.sowrix_has_permission('documents','view'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\62-storage-analytics-permissions.sql
+LINE: 33
+CODE:   guard:=CASE WHEN sig='public.sowrix_r467_board(text)' THEN $$IF public.sowrix_access_role()='admin' AND p_section IN ('analytics','security') THEN RAISE EXCEPTION 'Company-wide summary reserved for Super Admin' USING ERRCODE='42501'; END IF;$$
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\62-storage-analytics-permissions.sql
+LINE: 34
+CODE:   WHEN sig='public.sowrix_r463_hr_snapshot()' THEN $$IF public.sowrix_access_role()='admin' THEN RAISE EXCEPTION 'Unscoped HR summary reserved for Super Admin or authorized HR' USING ERRCODE='42501'; END IF;$$
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\62-storage-analytics-permissions.sql
+LINE: 35
+CODE:   ELSE $$IF public.sowrix_access_role() IS DISTINCT FROM 'super_admin' THEN RAISE EXCEPTION 'Company-wide summary reserved for Super Admin' USING ERRCODE='42501'; END IF;$$ END;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\63-privileged-settings-enquiries.sql
+LINE: 20
+CODE:   guard:=$body$ /* R101.6D settings guard */ IF public.sowrix_access_role() IS DISTINCT FROM 'super_admin' THEN RAISE EXCEPTION 'Super Admin settings permission required' USING ERRCODE='42501'; END IF;$body$;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\63-privileged-settings-enquiries.sql
+LINE: 33
+CODE:   IF public.sowrix_access_role()='admin' THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\63-privileged-settings-enquiries.sql
+LINE: 37
+CODE:   IF item.dw THEN guard:=guard||$body$ IF public.sowrix_access_role()='admin' AND ((p_action='employees' AND NOT coalesce(public.sowrix_has_permission('employees','view'),false)) OR (p_action='link_client' AND NOT coalesce(public.sowrix_has_permission('clients','edit'),false))) THEN RAISE EXCEPTION 'Related module permission required' USING ERRCODE='42501'; END IF; $body$; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\63-privileged-settings-enquiries.sql
+LINE: 44
+CODE: CREATE POLICY sowrix_r1016d_early_read ON public.sowrix_early_access_requests AS RESTRICTIVE FOR SELECT TO authenticated USING (public.sowrix_access_role() IS DISTINCT FROM 'admin' OR coalesce(public.sowrix_has_permission('enquiries','view'),false));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\63-privileged-settings-enquiries.sql
+LINE: 46
+CODE: CREATE POLICY sowrix_r1016d_history_read ON public.sowrix_early_access_history AS RESTRICTIVE FOR SELECT TO authenticated USING (public.sowrix_access_role() IS DISTINCT FROM 'admin' OR coalesce(public.sowrix_has_permission('enquiries','view'),false));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\65-crm-client-conversion.sql
+LINE: 22
+CODE:  IF NOT coalesce(public.sowrix_user_active(auth.uid()),false) OR coalesce(public.sowrix_access_role(),'') NOT IN ('admin','super_admin')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\65-crm-client-conversion.sql
+LINE: 33
+CODE:  IF NOT coalesce(public.sowrix_user_active(auth.uid()),false) OR coalesce(public.sowrix_access_role(),'') NOT IN ('admin','super_admin')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\66-r102-accepted-quotation-project-creation.sql
+LINE: 17
+CODE:  IF auth.uid() IS NULL OR public.sowrix_access_role() NOT IN ('admin','super_admin') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\67-r102-quotation-draft-invoice.sql
+LINE: 25
+CODE:  IF auth.uid() IS NULL OR public.sowrix_access_role() NOT IN ('admin','super_admin') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 321
+CODE: CREATE TABLE IF NOT EXISTS public.user_roles (
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 323
+CODE:  role text NOT NULL CHECK(role IN ('super_admin','admin','hr','hr_manager','hr_staff','project_manager','employee','client'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 387
+CODE: CREATE OR REPLACE FUNCTION public.sowrix_access_role()
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 392
+CODE: AS $$ SELECT coalesce(public.sowrix_access_role() IN ('admin','super_admin'),false) $$;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 413
+CODE:  WHEN public.sowrix_access_role() IN ('admin','super_admin','project_manager','client') THEN true
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 414
+CODE:  WHEN public.sowrix_access_role() IN ('hr','hr_manager','hr_staff','employee') THEN EXISTS(
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 418
+CODE:    AND public.sowrix_access_role()=ANY(m.allowed_roles)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 426
+CODE:  WHERE a.user_id=auth.uid() AND public.sowrix_access_role()=ANY(m.allowed_roles)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 468
+CODE: REVOKE ALL ON FUNCTION public.sowrix_access_role(),public.sowrix_access_admin(),
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 471
+CODE: GRANT EXECUTE ON FUNCTION public.sowrix_access_role(),public.sowrix_access_admin(),
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 529
+CODE:  SELECT EXISTS(SELECT 1 FROM public.projects p WHERE p.id=p_id AND ((public.sowrix_access_role()='project_manager' AND p.manager_id=auth.uid())
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 530
+CODE:  OR (public.sowrix_access_role()='employee' AND EXISTS(SELECT 1 FROM public.tasks t WHERE t.project_id=p.id AND t.assignee_id=auth.uid()))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 531
+CODE:  OR (public.sowrix_access_role()='client' AND EXISTS(SELECT 1 FROM public.clients c WHERE c.id=p.client_id AND c.auth_user_id=auth.uid()))))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 548
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.clients AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 551
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.clients AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 554
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.clients AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 557
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.clients AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 570
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.projects AS PERMISSIVE FOR SELECT TO authenticated USING (((public.sowrix_access_admin() OR (public.sowrix_access_role() IN ('client','employee','project_manager') AND public.sowrix_project_scope(id)))) AND public.sowrix_has_module_access('projects'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 573
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.projects AS RESTRICTIVE FOR SELECT TO authenticated USING (((public.sowrix_access_admin() OR (public.sowrix_access_role() IN ('client','employee','project_manager') AND public.sowrix_project_scope(id)))) AND public.sowrix_has_module_access('projects'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 576
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.projects AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND manager_id=auth.uid())));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 579
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.projects AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND manager_id=auth.uid())));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 582
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.projects AS PERMISSIVE FOR UPDATE TO authenticated USING ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND manager_id=auth.uid()))) WITH CHECK ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND manager_id=auth.uid())));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 585
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.projects AS RESTRICTIVE FOR UPDATE TO authenticated USING ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND manager_id=auth.uid()))) WITH CHECK ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND manager_id=auth.uid())));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 598
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.tasks AS PERMISSIVE FOR SELECT TO authenticated USING (((public.sowrix_access_admin() OR (public.sowrix_access_role()='employee' AND assignee_id=auth.uid()) OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(project_id)))) AND public.sowrix_has_module_access('tasks'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 601
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.tasks AS RESTRICTIVE FOR SELECT TO authenticated USING (((public.sowrix_access_admin() OR (public.sowrix_access_role()='employee' AND assignee_id=auth.uid()) OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(project_id)))) AND public.sowrix_has_module_access('tasks'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 604
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.tasks AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(project_id))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 607
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.tasks AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(project_id))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 610
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.tasks AS PERMISSIVE FOR UPDATE TO authenticated USING ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(project_id)))) WITH CHECK ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(project_id))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 613
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.tasks AS RESTRICTIVE FOR UPDATE TO authenticated USING ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(project_id)))) WITH CHECK ((public.sowrix_access_admin() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(project_id))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 626
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.invoices AS PERMISSIVE FOR SELECT TO authenticated USING (((public.sowrix_access_admin() OR (public.sowrix_access_role()='client' AND EXISTS(SELECT 1 FROM public.clients c WHERE c.id=client_id AND c.auth_user_id=auth.uid())))) AND public.sowrix_has_module_access('invoices'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 629
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.invoices AS RESTRICTIVE FOR SELECT TO authenticated USING (((public.sowrix_access_admin() OR (public.sowrix_access_role()='client' AND EXISTS(SELECT 1 FROM public.clients c WHERE c.id=client_id AND c.auth_user_id=auth.uid())))) AND public.sowrix_has_module_access('invoices'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 632
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.invoices AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 635
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.invoices AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 638
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.invoices AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 641
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.invoices AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 654
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.expenses AS PERMISSIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('expenses'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 657
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.expenses AS RESTRICTIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('expenses'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 660
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.expenses AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 663
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.expenses AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 666
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.expenses AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 669
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.expenses AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 682
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.quotations AS PERMISSIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('quotations'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 685
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.quotations AS RESTRICTIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('quotations'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 688
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.quotations AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 691
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.quotations AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 694
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.quotations AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 697
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.quotations AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 710
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.support_tickets AS PERMISSIVE FOR SELECT TO authenticated USING (((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR requester_id=auth.uid() OR assignee_id=auth.uid())) AND public.sowrix_has_module_access('tickets'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 713
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.support_tickets AS RESTRICTIVE FOR SELECT TO authenticated USING (((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR requester_id=auth.uid() OR assignee_id=auth.uid())) AND public.sowrix_has_module_access('tickets'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 716
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.support_tickets AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_role() IN ('admin','client','employee','hr','hr_manager','hr_staff','project_manager','super_admin') AND requester_id=auth.uid()));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 719
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.support_tickets AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_role() IN ('admin','client','employee','hr','hr_manager','hr_staff','project_manager','super_admin') AND requester_id=auth.uid()));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 722
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.support_tickets AS PERMISSIVE FOR UPDATE TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','project_manager','super_admin') AND ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR requester_id=auth.uid() OR assignee_id=auth.uid())))) WITH CHECK ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','project_manager','super_admin') AND ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR requester_id=auth.uid() OR assignee_id=auth.uid()))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 725
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.support_tickets AS RESTRICTIVE FOR UPDATE TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','project_manager','super_admin') AND ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR requester_id=auth.uid() OR assignee_id=auth.uid())))) WITH CHECK ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','project_manager','super_admin') AND ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR requester_id=auth.uid() OR assignee_id=auth.uid()))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 738
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.employees AS PERMISSIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('employees'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 741
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.employees AS RESTRICTIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('employees'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 750
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.employees AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 753
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.employees AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 766
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.attendance_records AS PERMISSIVE FOR SELECT TO authenticated USING (((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR (public.sowrix_access_role()='employee' AND employee_user_id=auth.uid()))) AND public.sowrix_has_module_access('attendance'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 769
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.attendance_records AS RESTRICTIVE FOR SELECT TO authenticated USING (((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR (public.sowrix_access_role()='employee' AND employee_user_id=auth.uid()))) AND public.sowrix_has_module_access('attendance'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 772
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.attendance_records AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 775
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.attendance_records AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 778
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.attendance_records AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 781
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.attendance_records AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 794
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.leave_requests AS PERMISSIVE FOR SELECT TO authenticated USING (((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR (public.sowrix_access_role()='employee' AND employee_user_id=auth.uid()))) AND public.sowrix_has_module_access('leaves'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 797
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.leave_requests AS RESTRICTIVE FOR SELECT TO authenticated USING (((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR (public.sowrix_access_role()='employee' AND employee_user_id=auth.uid()))) AND public.sowrix_has_module_access('leaves'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 800
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.leave_requests AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR (public.sowrix_access_role()='employee' AND employee_user_id=auth.uid() AND status='pending')));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 803
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.leave_requests AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin') OR (public.sowrix_access_role()='employee' AND employee_user_id=auth.uid() AND status='pending')));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 806
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.leave_requests AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 809
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.leave_requests AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 822
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.payroll_records AS PERMISSIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr_manager','super_admin')) AND public.sowrix_has_module_access('payroll'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 825
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.payroll_records AS RESTRICTIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr_manager','super_admin')) AND public.sowrix_has_module_access('payroll'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 828
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.payroll_records AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 831
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.payroll_records AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 834
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.payroll_records AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr_manager','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 837
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.payroll_records AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr_manager','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 856
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.notifications AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 859
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.notifications AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 862
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.notifications AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 865
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.notifications AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 878
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.audit_logs AS PERMISSIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('audit'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 881
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.audit_logs AS RESTRICTIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('audit'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 906
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.interviews AS PERMISSIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('interviews'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 909
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.interviews AS RESTRICTIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('interviews'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 912
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.interviews AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 915
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.interviews AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 918
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.interviews AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 921
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.interviews AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 934
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.departments AS PERMISSIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('departments'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 937
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.departments AS RESTRICTIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('departments'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 940
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.departments AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 943
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.departments AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 946
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.departments AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr_manager','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 949
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.departments AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr_manager','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 964
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.jobs AS PERMISSIVE FOR SELECT TO anon,authenticated USING (((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('jobs')) OR status='published');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 967
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.jobs AS RESTRICTIVE FOR SELECT TO anon,authenticated USING (((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('jobs')) OR status='published');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 970
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.jobs AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 973
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.jobs AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','hr_manager','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 976
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.jobs AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 979
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.jobs AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 994
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.job_applications AS PERMISSIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('applications'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 997
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.job_applications AS RESTRICTIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) AND public.sowrix_has_module_access('applications'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1006
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.job_applications AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1009
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.job_applications AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','hr','hr_manager','hr_staff','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1026
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.services AS PERMISSIVE FOR SELECT TO anon,authenticated USING (((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('services')) OR status='published');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1029
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.services AS RESTRICTIVE FOR SELECT TO anon,authenticated USING (((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('services')) OR status='published');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1032
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.services AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1035
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.services AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1038
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.services AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1041
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.services AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1056
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.portfolio_projects AS PERMISSIVE FOR SELECT TO anon,authenticated USING (((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('portfolio')) OR status='published');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1059
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.portfolio_projects AS RESTRICTIVE FOR SELECT TO anon,authenticated USING (((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('portfolio')) OR status='published');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1062
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.portfolio_projects AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1065
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.portfolio_projects AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1068
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.portfolio_projects AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1071
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.portfolio_projects AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1086
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.blog_posts AS PERMISSIVE FOR SELECT TO anon,authenticated USING (((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('blog')) OR status='published');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1089
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.blog_posts AS RESTRICTIVE FOR SELECT TO anon,authenticated USING (((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('blog')) OR status='published');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1092
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.blog_posts AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1095
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.blog_posts AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1098
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.blog_posts AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1101
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.blog_posts AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1116
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.contact_enquiries AS PERMISSIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('enquiries'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1119
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.contact_enquiries AS RESTRICTIVE FOR SELECT TO authenticated USING ((public.sowrix_access_role() IN ('admin','super_admin')) AND public.sowrix_has_module_access('enquiries'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1128
+CODE: CREATE POLICY sowrix_v3_update_allow ON public.contact_enquiries AS PERMISSIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1131
+CODE: CREATE POLICY sowrix_v3_update_scope ON public.contact_enquiries AS RESTRICTIVE FOR UPDATE TO authenticated USING (public.sowrix_access_role() IN ('admin','super_admin')) WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1146
+CODE: CREATE POLICY sowrix_v3_select_allow ON public.task_comments AS PERMISSIVE FOR SELECT TO authenticated USING (((public.sowrix_access_admin() OR EXISTS(SELECT 1 FROM public.tasks t WHERE t.id=task_id AND (t.assignee_id=auth.uid() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(t.project_id)))))) AND public.sowrix_has_module_access('task_comments'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1149
+CODE: CREATE POLICY sowrix_v3_select_scope ON public.task_comments AS RESTRICTIVE FOR SELECT TO authenticated USING (((public.sowrix_access_admin() OR EXISTS(SELECT 1 FROM public.tasks t WHERE t.id=task_id AND (t.assignee_id=auth.uid() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(t.project_id)))))) AND public.sowrix_has_module_access('task_comments'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1152
+CODE: CREATE POLICY sowrix_v3_insert_allow ON public.task_comments AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_role() IN ('admin','employee','project_manager','super_admin') AND author_id=auth.uid() AND ((public.sowrix_access_admin() OR EXISTS(SELECT 1 FROM public.tasks t WHERE t.id=task_id AND (t.assignee_id=auth.uid() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(t.project_id))))))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1155
+CODE: CREATE POLICY sowrix_v3_insert_scope ON public.task_comments AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK ((public.sowrix_access_role() IN ('admin','employee','project_manager','super_admin') AND author_id=auth.uid() AND ((public.sowrix_access_admin() OR EXISTS(SELECT 1 FROM public.tasks t WHERE t.id=task_id AND (t.assignee_id=auth.uid() OR (public.sowrix_access_role()='project_manager' AND public.sowrix_project_scope(t.project_id))))))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1169
+CODE: GRANT EXECUTE ON FUNCTION public.sowrix_access_role(),public.sowrix_access_admin(),public.sowrix_has_module_access(text) TO anon;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1218
+CODE: CREATE POLICY sowrix_resume_read ON storage.objects FOR SELECT TO authenticated USING(bucket_id='resumes' AND public.sowrix_has_module_access('applications') AND public.sowrix_access_role() IN ('admin','super_admin','hr','hr_staff','hr_manager'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1220
+CODE: CREATE POLICY sowrix_resume_read_scope ON storage.objects AS RESTRICTIVE FOR SELECT TO anon,authenticated USING(bucket_id<>'resumes' OR (public.sowrix_has_module_access('applications') AND public.sowrix_access_role() IN ('admin','super_admin','hr','hr_staff','hr_manager')));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1237
+CODE: DECLARE result_id uuid; uid uuid:=auth.uid(); r text:=public.sowrix_access_role(); today date:=(now() AT TIME ZONE 'Asia/Kolkata')::date; clock time:=(now() AT TIME ZONE 'Asia/Kolkata')::time;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1290
+CODE:   role_name text := public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1296
+CODE:   IF auth.uid() IS NULL OR role_name NOT IN ('admin','super_admin','hr','hr_manager','hr_staff','employee') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1386
+CODE:   INSERT INTO public.user_roles(user_id,role) VALUES(p_user_id,'employee')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1406
+CODE: DECLARE target uuid; role_name text:=public.sowrix_access_role(); profile jsonb; auth_name text; code text;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1408
+CODE:   IF auth.uid() IS NULL OR role_name NOT IN ('admin','super_admin','hr','hr_manager','hr_staff','employee') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1437
+CODE: DECLARE role_name text:=public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1439
+CODE:   IF auth.uid() IS NULL OR role_name NOT IN ('admin','super_admin','hr','hr_manager','hr_staff') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1472
+CODE:   USING (public.sowrix_access_role() IN ('admin','super_admin'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1473
+CODE:   WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1476
+CODE:   USING (public.sowrix_access_role() IN ('admin','super_admin'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1477
+CODE:   WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1518
+CODE:   INSERT INTO public.user_roles(user_id,role) VALUES(p_user_id,'employee')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1538
+CODE: DECLARE target uuid; role_name text:=public.sowrix_access_role(); profile jsonb; auth_name text; code text;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1540
+CODE:   IF auth.uid() IS NULL OR role_name NOT IN ('admin','super_admin','hr','hr_manager','hr_staff','employee') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1569
+CODE: DECLARE role_name text:=public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1571
+CODE:   IF auth.uid() IS NULL OR role_name NOT IN ('admin','super_admin','hr','hr_manager','hr_staff') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1604
+CODE:   USING (public.sowrix_access_role() IN ('admin','super_admin'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1605
+CODE:   WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1608
+CODE:   USING (public.sowrix_access_role() IN ('admin','super_admin'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1609
+CODE:   WITH CHECK (public.sowrix_access_role() IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1649
+CODE:  ((public.sowrix_access_role() IN ('hr','hr_manager','hr_staff') AND k IN ('document','onboarding','holiday','announcement','leave_allowance')) OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1650
+CODE:  (public.sowrix_access_role()='project_manager' AND k IN ('milestone','announcement'))))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1656
+CODE:   (r.audience='all_staff' AND public.sowrix_access_role()<>'client') OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1657
+CODE:   (r.audience='role' AND r.audience_value=public.sowrix_access_role()) OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1703
+CODE:  IF NOT (public.sowrix_access_role() IN ('admin','super_admin','hr','hr_manager','hr_staff') AND public.sowrix_has_module_access('employees')) THEN RAISE EXCEPTION 'Employee administration access required'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1709
+CODE:  SELECT q.* FROM public.quotations q JOIN public.clients c ON c.id=q.client_id WHERE c.auth_user_id=auth.uid() AND public.sowrix_access_role()='client' AND q.status<>'draft'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1715
+CODE:  IF auth.uid() IS NULL OR public.sowrix_access_role()<>'client' OR NOT EXISTS(SELECT 1 FROM public.clients c WHERE c.id=q.client_id AND c.auth_user_id=auth.uid()) THEN RAISE EXCEPTION 'Quotation not available'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1757
+CODE: CREATE POLICY sowrix_ui_attendance_update_guard ON public.attendance_records AS RESTRICTIVE FOR UPDATE TO authenticated USING(public.sowrix_access_role() NOT IN ('hr','hr_manager','hr_staff')) WITH CHECK(public.sowrix_access_role() NOT IN ('hr','hr_manager','hr_staff'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1859
+CODE:   WHERE r.user_id=auth.uid() AND lower(r.role::text) IN ('admin','super_admin'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 1986
+CODE:  FROM unnest(ARRAY['sowrix_access_admin()','sowrix_access_role()','sowrix_has_module_access(text)','sowrix_project_scope(uuid)']::text[]) required(signature)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2058
+CODE:  ((public.sowrix_access_role() IN ('hr','hr_manager','hr_staff') AND k IN ('document','onboarding','holiday','announcement','leave_allowance')) OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2059
+CODE:  (public.sowrix_access_role()='project_manager' AND k IN ('milestone','announcement'))))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2065
+CODE:   (r.audience='all_staff' AND public.sowrix_access_role()<>'client') OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2066
+CODE:   (r.audience='role' AND r.audience_value=public.sowrix_access_role()) OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2112
+CODE:  IF NOT (public.sowrix_access_role() IN ('admin','super_admin','hr','hr_manager','hr_staff') AND public.sowrix_has_module_access('employees')) THEN RAISE EXCEPTION 'Employee administration access required'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2118
+CODE:  SELECT q.* FROM public.quotations q JOIN public.clients c ON c.id=q.client_id WHERE c.auth_user_id=auth.uid() AND public.sowrix_access_role()='client' AND q.status<>'draft'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2124
+CODE:  IF auth.uid() IS NULL OR public.sowrix_access_role()<>'client' OR NOT EXISTS(SELECT 1 FROM public.clients c WHERE c.id=q.client_id AND c.auth_user_id=auth.uid()) THEN RAISE EXCEPTION 'Quotation not available'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2166
+CODE: CREATE POLICY sowrix_ui_attendance_update_guard ON public.attendance_records AS RESTRICTIVE FOR UPDATE TO authenticated USING(public.sowrix_access_role() NOT IN ('hr','hr_manager','hr_staff')) WITH CHECK(public.sowrix_access_role() NOT IN ('hr','hr_manager','hr_staff'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2324
+CODE:   NOT (p_module='employees' AND p_action='create' AND public.sowrix_access_role() NOT IN ('hr','hr_staff','hr_manager')) AND
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2332
+CODE:   WHERE g.user_id=auth.uid() AND g.module_key=p_module AND g.row_scope='all' AND c.allow_wide AND public.sowrix_access_role()<>'client')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2344
+CODE:  RETURN jsonb_build_object('role',public.sowrix_access_role(),'version',4,
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2367
+CODE:  actor_role:=public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2368
+CODE:  IF actor_role NOT IN ('admin','super_admin') OR actor_role IS NULL THEN RAISE EXCEPTION 'Administrator access required' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2373
+CODE:  IF old_role='super_admin' OR p_role='super_admin' THEN RAISE EXCEPTION 'Super Admin changes require the project owner' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 2374
+CODE:  IF (old_role='admin' OR p_role='admin') AND actor_role<>'super_admin' THEN RAISE EXCEPTION 'Only Super Admin can change Administrator access' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3276
+CODE:  IF TG_TABLE_NAME='quotations' AND public.sowrix_access_role()='client' THEN m:='client_quotes'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3312
+CODE: DECLARE result_id uuid; uid uuid:=auth.uid(); r text:=public.sowrix_access_role(); today date:=(now() AT TIME ZONE 'Asia/Kolkata')::date; clock time:=(now() AT TIME ZONE 'Asia/Kolkata')::time;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3342
+CODE:  SELECT q.* FROM public.quotations q JOIN public.clients c ON c.id=q.client_id WHERE c.auth_user_id=auth.uid() AND public.sowrix_access_role()='client' AND public.sowrix_has_permission('client_quotes','view') AND q.status<>'draft'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3365
+CODE:   AND (public.sowrix_access_role() IN ('hr','hr_staff','hr_manager')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3443
+CODE:  IF auth.uid() IS NULL OR NOT public.sowrix_has_permission('client_quotes','approve') OR public.sowrix_access_role()<>'client' OR NOT EXISTS(SELECT 1 FROM public.clients c WHERE c.id=q.client_id AND c.auth_user_id=auth.uid()) THEN RAISE EXCEPTION 'Quotation not available'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3493
+CODE:  IF auth.uid() IS NULL OR public.sowrix_access_role() IS NULL THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3562
+CODE:  IF coalesce(auth.role(),'')<>'service_role' OR NOT EXISTS(SELECT 1 FROM public.user_roles WHERE user_id=p_actor_id AND role::text IN ('admin','super_admin')) THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3587
+CODE:  INSERT INTO public.user_roles(user_id,role) VALUES(p_user_id,'client') ON CONFLICT DO NOTHING;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3609
+CODE:  IF auth.uid() IS NULL OR public.sowrix_access_role()<>'client' THEN RAISE EXCEPTION 'Client sign-in required' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3619
+CODE:  SELECT auth.uid() IS NOT NULL AND public.sowrix_access_role()='client' AND EXISTS
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3626
+CODE:  (public.sowrix_access_role()<>'client' OR (client_id IS NOT NULL AND public.sowrix_client_active_owned(client_id)));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3629
+CODE:  (public.sowrix_access_role()<>'client' OR (status<>'draft' AND client_id IS NOT NULL AND public.sowrix_client_active_owned(client_id)));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3632
+CODE:  (public.sowrix_access_role()<>'client' OR (auth_user_id=auth.uid() AND status='active'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3635
+CODE:  (public.sowrix_access_role()<>'client' OR (requester_id=auth.uid() AND public.sowrix_client_active_owned(client_id)));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3657
+CODE:   FROM public.user_roles WHERE role::text IN ('admin','super_admin');
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3799
+CODE:  SELECT q.* FROM public.quotations q JOIN public.clients c ON c.id=q.client_id WHERE c.auth_user_id=auth.uid() AND c.status='active' AND public.sowrix_access_role()='client' AND public.sowrix_has_permission('client_quotes','view') AND q.status<>'draft'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3805
+CODE:  IF auth.uid() IS NULL OR NOT public.sowrix_has_permission('client_quotes','approve') OR public.sowrix_access_role()<>'client' OR NOT EXISTS(SELECT 1 FROM public.clients c WHERE c.id=q.client_id AND c.auth_user_id=auth.uid() AND c.status='active') THEN RAISE EXCEPTION 'Quotation not available'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3889
+CODE:  IF p_recent_mfa AND public.sowrix_access_role()<>'client' THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3903
+CODE:  SELECT public.sowrix_secure_session_allowed() AND public.sowrix_access_role()='client' AND EXISTS(
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3914
+CODE:  AND (p_client_id IS NULL OR c.id=p_client_id) AND public.sowrix_access_role()='client')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3918
+CODE:  SELECT coalesce(public.sowrix_access_role() IN ('admin','super_admin'),false) AND public.sowrix_secure_session_allowed()
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3930
+CODE:   NOT (p_module='employees' AND p_action='create' AND public.sowrix_access_role() NOT IN ('hr','hr_staff','hr_manager')) AND
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3936
+CODE: DECLARE account_role text:=public.sowrix_access_role(); permitted boolean:=public.sowrix_secure_session_allowed();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3975
+CODE:  (public.sowrix_access_role()='project_manager' AND p.manager_id=auth.uid()) OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3976
+CODE:  (public.sowrix_access_role()='employee' AND EXISTS(SELECT 1 FROM public.tasks t WHERE t.project_id=p.id AND t.assignee_id=auth.uid())) OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3977
+CODE:  (public.sowrix_access_role()='client' AND public.sowrix_org_access(p.client_id,'general'))))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3992
+CODE:  USING(public.sowrix_access_role()<>'client' OR public.sowrix_org_access(id,'general'));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3995
+CODE:  USING(public.sowrix_access_role()<>'client' OR (status<>'draft' AND public.sowrix_org_access(client_id,'billing')));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3998
+CODE:  USING(public.sowrix_access_role()<>'client' OR (public.sowrix_org_access(client_id,'tickets') OR (client_id IS NULL AND requester_id=auth.uid() AND public.sowrix_client_active_owned(NULL))))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 3999
+CODE:  WITH CHECK(public.sowrix_access_role()<>'client' OR (requester_id=auth.uid() AND public.sowrix_org_access(client_id,'tickets')));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4005
+CODE:  IF public.sowrix_access_role()='client' AND NEW.client_id IS NULL THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4047
+CODE:   EXECUTE format('CREATE POLICY staff_notes ON public.%I FOR SELECT TO authenticated USING(public.sowrix_access_role()<>''client'' AND public.sowrix_has_permission(%L,''view'') AND EXISTS(SELECT 1 FROM public.%I p WHERE p.id=record_id))',t||'_private_notes',t,t);
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4076
+CODE:  IF p_module NOT IN ('clients','invoices','quotations') OR cardinality(p_ids)>100 OR public.sowrix_access_role()='client' OR NOT public.sowrix_has_permission(p_module,'view') THEN RAISE EXCEPTION 'Private notes unavailable' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4111
+CODE:  IF EXISTS(SELECT 1 FROM public.user_roles WHERE user_id=p_user_id AND role::text='super_admin') AND public.sowrix_access_role()<>'super_admin' THEN RAISE EXCEPTION 'Super administrator required' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4125
+CODE:  IF auth.uid() IS NULL OR public.sowrix_access_role()<>'client' THEN RAISE EXCEPTION 'Client sign-in required' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4142
+CODE:   role_name text := public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4149
+CODE:   IF auth.uid() IS NULL OR role_name NOT IN ('admin','super_admin','hr','hr_manager','hr_staff','employee') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4271
+CODE:  IF auth.uid() IS NULL OR public.sowrix_access_role() IS NULL THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4304
+CODE:   AND (public.sowrix_access_role() IN ('hr','hr_staff','hr_manager')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4392
+CODE:  actor_role:=public.sowrix_access_role();
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4393
+CODE:  IF actor_role NOT IN ('admin','super_admin') OR actor_role IS NULL THEN RAISE EXCEPTION 'Administrator access required' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4398
+CODE:  IF old_role='super_admin' OR p_role='super_admin' THEN RAISE EXCEPTION 'Super Admin changes require the project owner' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4399
+CODE:  IF (old_role='admin' OR p_role='admin') AND actor_role<>'super_admin' THEN RAISE EXCEPTION 'Only Super Admin can change Administrator access' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4445
+CODE: DECLARE result_id uuid; uid uuid:=auth.uid(); r text:=public.sowrix_access_role(); today date:=(now() AT TIME ZONE 'Asia/Kolkata')::date; clock time:=(now() AT TIME ZONE 'Asia/Kolkata')::time;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4546
+CODE:  IF NOT (public.sowrix_access_role() IN ('admin','super_admin','hr','hr_manager','hr_staff') AND public.sowrix_has_module_access('employees')) THEN RAISE EXCEPTION 'Employee administration access required'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4563
+CODE:  IF auth.uid() IS NULL OR NOT public.sowrix_has_permission('client_quotes','approve') OR public.sowrix_access_role()<>'client' OR NOT public.sowrix_org_access(q.client_id,'billing') THEN RAISE EXCEPTION 'Quotation not available' USING ERRCODE='42501'; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4584
+CODE:  INSERT INTO public.user_roles(user_id,role) VALUES(p_user_id,'client') ON CONFLICT DO NOTHING;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4757
+CODE:  SELECT public.sowrix_secure_session_allowed() AND public.sowrix_access_role()='super_admin'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4766
+CODE:  IF public.sowrix_access_role() IS DISTINCT FROM 'client' THEN RETURN false; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4820
+CODE:  IF NOT EXISTS(SELECT 1 FROM public.user_roles WHERE user_id=p_user_id AND role::text='super_admin') THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4849
+CODE:    'requires_mfa',public.sowrix_access_role()<>'client' OR EXISTS(SELECT 1 FROM public.sowrix_def_members WHERE user_id=auth.uid() AND enabled AND role='customer_admin'),
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 4850
+CODE:    'role',public.sowrix_access_role(),'user_id',auth.uid(),
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5283
+CODE:  IF predicate IS NOT NULL AND (position('client' in predicate)=0 OR position('super_admin' in predicate)=0) THEN
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5286
+CODE:     ||predicate||') OR role::text IN (''client'',''super_admin''))';
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5466
+CODE:  VALUES('amc','{super_admin,admin,hr_manager,hr_staff,project_manager,employee,client}')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5497
+CODE:   (public.sowrix_access_role()<>'client' AND public.sowrix_wide_access('amc','view')) OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5498
+CODE:   (public.sowrix_access_role()='client' AND status<>'draft' AND public.sowrix_org_access(client_id,'billing'))));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5501
+CODE:  public.sowrix_secure_session_allowed() AND public.sowrix_access_role()<>'client' AND public.sowrix_has_permission('amc','create') AND
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5505
+CODE:  public.sowrix_secure_session_allowed() AND public.sowrix_access_role()<>'client' AND public.sowrix_has_permission('amc','edit') AND
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5507
+CODE:  WITH CHECK(public.sowrix_secure_session_allowed() AND public.sowrix_access_role()<>'client' AND public.sowrix_has_permission('amc','edit') AND
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5593
+CODE:  (lower(r.role::text) IN ('admin','super_admin') OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5600
+CODE:  WHERE r.user_id=p_user AND lower(r.role::text) IN ('super_admin','admin','hr','hr_manager','hr_staff','employee','project_manager')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5602
+CODE:  (lower(r.role::text) IN ('admin','super_admin') OR
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5631
+CODE:  IF r IN ('admin','super_admin') THEN RETURN true; END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5655
+CODE:  SELECT public.sowrix_secure_session_allowed() AND public.sowrix_access_role()<>'client'
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5692
+CODE:  AND NOT(m IN ('applications','interviews') AND public.sowrix_access_role() IN ('hr','hr_staff','hr_manager'))
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5693
+CODE:  AND NOT(m='projects' AND public.sowrix_access_role()='project_manager' AND o->>f=auth.uid()::text)
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5700
+CODE:    IF NOT public.sowrix_has_permission(m,'assign') OR public.sowrix_access_role()='client' THEN RAISE EXCEPTION 'Assignment permission required' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5728
+CODE:  OR public.sowrix_access_role()='client' OR NOT public.sowrix_user_record_access(auth.uid(),p_module,rec) THEN RAISE EXCEPTION 'Record not available for assignment' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5740
+CODE:  IF t IS NULL OR public.sowrix_access_role()='client' OR NOT public.sowrix_has_permission(p_module,'assign') THEN RAISE EXCEPTION 'Assignment permission required' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 5753
+CODE:  IF t IS NULL OR NOT(p_status=ANY(allowed)) OR NOT public.sowrix_has_permission(p_module,'edit') OR public.sowrix_access_role()='client' THEN RAISE EXCEPTION 'Status update unavailable' USING ERRCODE='42501';END IF;
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 6049
+CODE:  see_team:=public.sowrix_access_admin() OR EXISTS(SELECT 1 FROM public.sowrix_permission_catalog c WHERE c.module_key IN ('employees','attendance','leaves','payroll','interviews') AND public.sowrix_has_permission(c.module_key,'view') AND (public.sowrix_access_role() IN ('hr','hr_staff','hr_manager') OR public.sowrix_wide_access(c.module_key,'view')));
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 6075
+CODE:  FROM public.sowrix_ticket_replies WHERE ticket_id=p_ticket AND (visibility='public' OR public.sowrix_access_role()<>'client')
+----------------------------------------
+FILE: C:\Users\siyamjith\Downloads\SOWRIX-R102-STAGE5-LAUNCH-PACKAGE\SOWRIX-R102-STAGE2-CLIENT-CONVERSION\database\SOWRIX-DEFENSOWRIX-BACKEND-COMPLETE.sql
+LINE: 6083
+CODE:  IF p_visibility NOT IN ('public','internal') OR (p_visibility='internal' AND public.sowrix_access_role()='client') OR p_key IS NULL THEN RAISE EXCEPTION 'Invalid reply visibility' USING ERRCODE='42501';END IF;
+----------------------------------------
