@@ -1,0 +1,5 @@
+SELECT strpos(pg_get_functiondef('public.sowrix_has_permission(text,text)'::regprocedure),'R101.4 business grants')>0 AS current_actor_guard,
+ strpos(pg_get_functiondef('public.sowrix_user_permission(uuid,text,text)'::regprocedure),'R101.4 business grants')>0 AS target_actor_guard;
+SELECT module_key,actions FROM public.sowrix_permission_catalog WHERE module_key IN ('expenses','clients','projects','tasks','invoices','quotations','tickets') ORDER BY module_key;
+SELECT tablename,policyname,cmd,permissive,qual,with_check FROM pg_policies WHERE schemaname='public' AND tablename IN ('expenses','clients','projects','tasks','invoices','quotations','support_tickets') ORDER BY tablename,policyname;
+SELECT c.module_key,count(r.user_id) AS admins,count(g.user_id) AS explicitly_granted FROM public.sowrix_permission_catalog c CROSS JOIN public.user_roles r LEFT JOIN public.sowrix_action_grants g ON g.user_id=r.user_id AND g.module_key=c.module_key WHERE r.role::text='admin' AND c.module_key IN ('expenses','clients','projects','tasks','invoices','quotations','tickets') GROUP BY c.module_key ORDER BY c.module_key;
