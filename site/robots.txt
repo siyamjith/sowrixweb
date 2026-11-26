@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin
+Disallow: /hr
+Disallow: /employee
+Disallow: /portal
+Disallow: /client
+Disallow: /workspace
+Disallow: /api
+Disallow: /downloads/reference

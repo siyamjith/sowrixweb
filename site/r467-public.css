@@ -1,0 +1,41 @@
+/* Approved SOWRIX palette, shared by standalone documents and status panels. */
+:root{
+  color-scheme:light dark;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+  --bg:#f8f8fc;--ink:#09152d;--muted:#46536b;--card:#fff;
+  --line:#dfddec;--brand:#4820b5;--tint:#ede8fb;
+  background:var(--bg);color:var(--ink);
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#09152d;--ink:#f8f8fc;--muted:#bbc6dd;--card:#101f3c;
+    --line:#344361;--brand:#c4afff;--tint:#252452}
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 10% 0%,var(--tint),transparent 55%);overflow-wrap:anywhere}
+header,main,footer{width:min(100%,160rem);margin-inline:auto;padding-inline:clamp(1.25rem,3.25vw,6rem)}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.75rem 1.25rem;padding-block:1rem;border-bottom:1px solid var(--line)}
+header .brand{display:flex;align-items:center;gap:.65rem;font-weight:800;line-height:1.15;text-decoration:none;color:var(--ink)}
+header img{width:48px;height:48px;object-fit:contain}
+header .brand span::after{content:"AI. AUTOMATION. TECHNOLOGY.";display:block;margin-top:.3rem;color:var(--muted);font-size:.65rem;letter-spacing:.09em}
+nav{display:flex;flex-wrap:wrap;gap:.25rem 1rem}
+nav a{display:inline-flex;align-items:center;min-height:44px;font-weight:650}
+main{padding-block:clamp(2rem,6vw,5rem)}
+a,.eyebrow{color:var(--brand)}
+a:focus-visible,button:focus-visible{outline:3px solid #007bea;outline-offset:4px}
+h1,h2{font-family:Manrope,Inter,system-ui,sans-serif;line-height:1.1}
+h1{font-size:clamp(2rem,6vw,4.25rem);letter-spacing:-.04em;margin-block:.25em}
+h2{font-size:clamp(1.2rem,3vw,1.75rem)}
+.eyebrow{font-size:.85rem;font-weight:750;letter-spacing:.14em;text-transform:uppercase}
+p{max-width:75ch;color:var(--muted);line-height:1.7}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:1rem;margin-block:2rem}
+.card,.status-entry{padding:clamp(1rem,3vw,1.5rem);border:1px solid var(--line);border-radius:1.25rem;background:var(--card)}
+.card h2,.card p{margin-block:0 .5rem}
+.pill{display:inline-block;padding:.35rem .75rem;border-radius:99px;background:var(--tint);color:var(--brand);font-weight:750}
+.cta{display:inline-flex;align-items:center;min-height:44px;background:#4820b5;color:#fff;border-radius:99px;padding:.6rem 1.2rem;font-weight:700;text-decoration:none}
+.muted,footer{font-size:.9rem;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding-block:1.25rem}
+#status-feed{max-width:85ch;list-style:none;padding:0}
+.status-entry{margin-block:.75rem}
+.status-entry strong{color:var(--brand)}
+.sx-editorial-article article,.sx-standalone-panel{max-width:75ch;margin-inline:auto}
+.sx-editorial-article article img{display:block;max-width:100%;height:auto;border-radius:1rem;margin-block:1.5rem}

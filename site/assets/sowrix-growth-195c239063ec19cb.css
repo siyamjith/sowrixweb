@@ -1,0 +1,27 @@
+/* Scoped SOWRIX Growth Center. Accessible in light and dark themes. */
+.sx-r467-overlay{position:fixed;inset:0;z-index:2147482600;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(1,10,33,.82);backdrop-filter:blur(9px)}
+.sx-r467-panel{width:min(980px,100%);max-height:min(94dvh,900px);display:flex;flex-direction:column;color:#f2f7ff;background:#081c3d;border:1px solid #3156a1;border-radius:20px;box-shadow:0 28px 80px #0009;overflow:hidden;font:inherit}
+.sx-r467-panel header{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:20px 24px;border-bottom:1px solid #304978;background:linear-gradient(110deg,#0b2659,#07182f)}
+.sx-r467-panel header small{font-size:12px;letter-spacing:.1em;color:#9ad6ff}.sx-r467-panel h2{font-size:clamp(1.15rem,3vw,1.7rem);margin:3px 0;color:#fff}
+.sx-r467-panel main{overflow:auto;padding:22px 24px;overscroll-behavior:contain}.sx-r467-panel footer{padding:12px 24px;border-top:1px solid #294474;font-size:12px;color:#bdd6fa}
+.sx-r467-panel p,.sx-r467-panel small,.sx-r467-panel label,.sx-r467-panel span{color:#d5e4ff}.sx-r467-panel strong{color:#fff}
+.sx-r467-panel a{color:#89d1ff;text-decoration:underline}
+.sx-r467-grid,.sx-r467-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}.sx-r467-list{display:grid;gap:12px;margin:18px 0}
+.sx-r467-list article,.sx-r467-stats article{padding:14px;border:1px solid #35558b;background:#112b54;border-radius:12px;overflow-wrap:anywhere}
+.sx-r467-panel article h3{color:#fff;font-size:1.02rem;margin:0 0 8px}.sx-r467-stats strong{display:block;font-size:1.7rem;padding-top:8px}
+.sx-r467-panel label{display:grid;gap:5px;margin:12px 0;font-weight:600;font-size:.92rem}
+.sx-r467-panel input,.sx-r467-panel textarea,.sx-r467-panel select{width:100%;box-sizing:border-box;border:1px solid #7390c2;border-radius:8px;background:#061630;color:#fff;padding:10px 12px;font:inherit;color-scheme:dark}
+.sx-r467-panel textarea{min-height:65px;resize:vertical}
+.sx-r467-panel button{cursor:pointer;border:1px solid #6bafff;border-radius:9px;color:#fff;background:#195bc7;padding:10px 14px;font-weight:650;margin:5px 5px 5px 0}
+.sx-r467-panel button:hover{background:#256de5}.sx-r467-panel button:disabled{opacity:.6;cursor:wait}.sx-r467-panel button:focus-visible,.sx-r467-panel input:focus-visible,.sx-r467-panel select:focus-visible{outline:3px solid #ff7663;outline-offset:2px}
+.sx-r467-panel details{margin:16px 0;padding:12px;border:1px solid #335487;border-radius:12px}.sx-r467-panel summary{cursor:pointer;font-weight:700;color:#fff}.sx-r467-message{min-height:24px;color:#b6f2dd!important}
+.sx-r467-body{white-space:pre-wrap}
+html:not(.sx-user-dark) .sx-r467-panel{background:#f6f9ff;color:#132747;border-color:#a9badd}
+html:not(.sx-user-dark) .sx-r467-panel header{background:linear-gradient(100deg,#103b83,#061f43)}
+html:not(.sx-user-dark) .sx-r467-panel p,html:not(.sx-user-dark) .sx-r467-panel label,html:not(.sx-user-dark) .sx-r467-panel small,html:not(.sx-user-dark) .sx-r467-panel span{color:#233e63}
+html:not(.sx-user-dark) .sx-r467-panel article{background:#e9f1ff;border-color:#b8cae8}
+html:not(.sx-user-dark) .sx-r467-panel article h3,html:not(.sx-user-dark) .sx-r467-panel article strong{color:#102955}
+html:not(.sx-user-dark) .sx-r467-panel input,html:not(.sx-user-dark) .sx-r467-panel select,html:not(.sx-user-dark) .sx-r467-panel textarea{background:#fff;color:#152945;color-scheme:light}
+html:not(.sx-user-dark) .sx-r467-panel footer{color:#345477}
+@media(max-width:640px){.sx-r467-overlay{padding:5px;align-items:end}.sx-r467-panel{max-height:97dvh;border-radius:16px 16px 5px 5px}.sx-r467-panel header,.sx-r467-panel main{padding:14px}.sx-r467-panel footer{padding:10px 14px}.sx-r467-grid,.sx-r467-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.sx-r467-overlay{backdrop-filter:none}}
